@@ -1,0 +1,15 @@
+<div class="row justify-content-md-center">
+  <div class="col-8">
+    <form action="/rooms/{{room.id}}/posts/{{post.id}}/comments" method="post" id="new-comment-form">
+      <legend>New Comment</legend>
+
+      <div class="form-group">
+        <textarea type="text" name="body" class="form-control" id="comment-body" placeholder="Body" form="new-comment-form"></textarea>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

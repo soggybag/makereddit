@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <h1>{{room.topic}}</h1>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-8">
+    {{#each posts as |post|}}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title text-center">{{post.subject}}</h3>
+          <p>{{post.body}}</p>
+        </div>
+
+        <div class="card-footer text-muted text-right">
+          <span class="points-span">{{post.points}} points </span>
+
+          <div class="btn-group btn-group-sm">
+            <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+              <input type="hidden" name="points" id="post-points" value="-1">
+              <button type="submit" class="downvote-button">-</button>
+            </form>
+
+            <form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+              <input type="hidden" name="points" id="post-points" value="1">
+              <button type="submit" class="upvote-button">+</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add everything between the <ul>...</ul> tags -->
+      <ul>
+        {{#each post.comments as |comment|}}
+          <li>{{comment.body}}</li>
+        {{/each}}
+        <li><a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/new">New comment</a></li>
+      </ul>
+
+    {{/each}}
+
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <a href="/rooms/{{room.id}}/posts/new">New Post</a>
+</div>

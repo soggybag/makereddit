@@ -1,0 +1,13 @@
+<div>
+  Rooms Index
+</div>
+
+<div>
+  <ul>
+    {{#each rooms as |room|}}
+      <li>
+        <a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit">edit</a>
+      </li>
+    {{/each}}
+  </ul>
+<div>
