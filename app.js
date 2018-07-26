@@ -14,6 +14,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const rooms = require('./routes/rooms');
 
+const Room = require('./models/room');
+
 // ------------------------------------------------------------
 // Create Express app
 const app = express();
@@ -42,6 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 // ------------------------------------------------------
+// Add Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,7 +57,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/rooms', rooms);
+app.use('/rooms', rooms); // Rooms route: localhost:3000/rooms
+
+app.get('/api/rooms', (req, res) => {
+  Room.find({}, 'topic').then((rooms) => {
+    res.json(rooms);
+  }).catch((err) => {
+    console.log(err.message);
+  });
+})
 
 
 // catch 404 and forward to error handler

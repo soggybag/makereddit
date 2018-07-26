@@ -23,14 +23,14 @@ router.get('/new', auth.requireLogin, (req, res) => {
 
 router.post('/', auth.requireLogin, (req, res) => {
   let room;
+  console.log('Posts router /');
   Room.findById(req.params.roomId).then((foundRoom) => {
     room = foundRoom;
     const post = new Post(req.body);
     post.room = room;
     return post.save();
   }).then((post) => {
-    console.log(post);
-    return res.redirect(`/rooms/${room._id}`);
+    res.redirect(`/rooms/${room._id}`);
   }).catch((err) => {
     console.log(err.message);
   });

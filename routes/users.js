@@ -6,10 +6,17 @@ const User = require('../models/user');
 
 // Users index
 router.get('/', (req, res) => {
+  // User.find({}, 'username').then((users) => {
+  //   res.render('users/index', { users });
+  // }).catch((err) => {
+  //   console.log(err.message);
+  // });
+
+  // User.find({}, 'username').then().catch()
   User.find({}, 'username').then((users) => {
     res.render('users/index', { users });
   }).catch((err) => {
-    console.log(err.message);
+    console.error(err);
   });
 
   // User.find({}, 'username', (err, users) => {
