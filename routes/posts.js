@@ -20,6 +20,7 @@ router.get('/new', auth.requireLogin, (req, res) => {
   // });
 });
 
+
 router.post('/', auth.requireLogin, (req, res) => {
   let room;
   Room.findById(req.params.roomId).then((foundRoom) => {
@@ -28,6 +29,7 @@ router.post('/', auth.requireLogin, (req, res) => {
     post.room = room;
     return post.save();
   }).then((post) => {
+    console.log(post);
     return res.redirect(`/rooms/${room._id}`);
   }).catch((err) => {
     console.log(err.message);
