@@ -15,6 +15,7 @@ const usersRouter = require('./routes/users');
 const rooms = require('./routes/rooms');
 
 const Room = require('./models/room');
+const User = require('./models/user');
 
 // ------------------------------------------------------------
 // Create Express app
@@ -65,9 +66,18 @@ app.get('/api/rooms', (req, res) => {
   }).catch((err) => {
     console.log(err.message);
   });
-})
+});
 
+// api/users
+app.get('/api/users', (req, res) => {
+  User.find().then((users) => {
+    res.json(users);
+  }).catch((err) => {
+    console.log(err.message);
+  });
+});
 
+// --------------------------------------------------------
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

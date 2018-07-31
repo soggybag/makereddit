@@ -61,18 +61,16 @@ router.get('/:id', auth.requireLogin, (req, res) => {
   //   console.log(err.message);
   // });
 
-let room;
+  let room;
 
-Room.findById(req.params.id).then((foundRoom) => {
-  room = foundRoom;
-  return Post.find({ room });
-}).then((posts) => {
-  res.render('rooms/show', { room, posts, roomId: req.params.id });
-}).catch((err) => {
-  console.log(err.message);
-});
-
-
+  Room.findById(req.params.id).then((foundRoom) => {
+    room = foundRoom;
+    return Post.find({ room });
+  }).then((posts) => {
+    res.render('rooms/show', { room, posts, roomId: req.params.id });
+  }).catch((err) => {
+    console.log(err.message);
+  });
 
   // Rooms show
   // Room.findById(req.params.id, function(err, room) {

@@ -1,2 +1,24 @@
 <h1><a href="/">{{title}}</a></h1>
 <p>Welcome to {{title}}</p>
+
+<ul id="users">
+  <!-- users -->
+</ul>
+
+<script>
+  console.log('Loading users (front end)');
+  fetch('/api/users').then((res) => {
+    return res.json();
+  }).then((json) => {
+    console.log('found users (front end)');
+    console.log(json);
+    let str = '';
+    for (let i = 0; i < json.length; i += 1) {
+      str += `<li>${json[i].username}</li>`;
+    }
+    console.log(str);
+    document.getElementById('users').innerHTML = str;
+  }).catch((err) => {
+    console.log(err.message);
+  });
+</script>
