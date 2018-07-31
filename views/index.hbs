@@ -5,6 +5,34 @@
   <!-- users -->
 </ul>
 
+<div>
+  <h1 id="name"></h1>
+  <p class="app-name" id="app"></p>
+  <div id="date"></div>
+</div>
+
+<script>
+  fetch('/anything/bananas').then((res) => {
+    return res.json();
+  }).then((data) => {
+    console.log('----------------------');
+    console.log(data);
+    console.log('----------------------');
+    document.getElementById('name').innerHTML = data.name;
+    document.getElementById('app').innerHTML = data.app;
+    document.getElementById('date').innerHTML = data.date;
+  }).catch((err) => {
+    console.log(err.message);
+  });
+</script>
+
+
+
+
+
+
+
+
 <script>
   console.log('Loading users (front end)');
   fetch('/api/users').then((res) => {

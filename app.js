@@ -60,6 +60,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/rooms', rooms); // Rooms route: localhost:3000/rooms
 
+app.get('/anything/bananas', (req, res) => {
+  res.json({ name:'Ben', app:'Tutors', date: 'today'});
+})
+
 app.get('/api/rooms', (req, res) => {
   Room.find({}, 'topic').then((rooms) => {
     res.json(rooms);
