@@ -13,6 +13,7 @@ const session = require('express-session');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const rooms = require('./routes/rooms');
+const auth = require('./routes/helpers/auth');
 
 const Room = require('./models/room');
 const User = require('./models/user');
@@ -61,8 +62,8 @@ app.use('/users', usersRouter);
 app.use('/rooms', rooms); // Rooms route: localhost:3000/rooms
 
 app.get('/anything/bananas', (req, res) => {
-  res.json({ name:'Ben', app:'Tutors', date: 'today'});
-})
+  res.json({ name: 'Ben', app: 'Tutors', date: 'today' });
+});
 
 app.get('/api/rooms', (req, res) => {
   Room.find({}, 'topic').then((rooms) => {
@@ -78,6 +79,18 @@ app.get('/api/users', (req, res) => {
     res.json(users);
   }).catch((err) => {
     console.log(err.message);
+  });
+});
+
+// Handle a post request
+app.post('/api/room/new', (req, res) => {
+  const room = new Room(req.body);
+  room.save().then((room) => {
+    // On success send the room back to the browser
+    res.json({ success: true, room });
+  }).catch((err) => {
+    // On an error send the err object
+    res.json(err);
   });
 });
 

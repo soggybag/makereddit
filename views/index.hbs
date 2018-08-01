@@ -11,6 +11,52 @@
   <div id="date"></div>
 </div>
 
+<div>
+  <button id="click">Click!</button>
+</div>
+
+<div>
+  <form id="form">
+    <input id="room-input" type="text" placeholder="room name">
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script>
+  const button = document.getElementById('click');
+  button.onclick = function(e) {
+    console.log(e);
+    console.log('Button Click!');
+  }
+
+  const form = document.getElementById('form');
+  const roomInput = document.getElementById('room-input');
+
+  form.onsubmit = function(e) {
+    e.preventDefault(); // Prevent the default behavior!
+
+    console.log(e);
+
+    const topic = roomInput.value;
+    const body = JSON.stringify({ topic });
+    const method = 'post';
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    fetch('/api/room/new', { method, body, headers }).then((res) => {
+      return res.json();
+    }).then((data) => {
+      console.log(`form data returned: ${data}`);
+      console.log(data);
+    }).catch((err) => {
+      console.log(err.message);
+    });
+  }
+</script>
+
+
 <script>
   fetch('/anything/bananas').then((res) => {
     return res.json();
