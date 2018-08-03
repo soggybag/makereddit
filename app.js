@@ -1,3 +1,9 @@
+// ------------------------------------------------------------
+// Dependancies
+
+
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -13,7 +19,7 @@ const session = require('express-session');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const rooms = require('./routes/rooms');
-const auth = require('./routes/helpers/auth');
+// const auth = require('./routes/helpers/auth');
 
 const Room = require('./models/room');
 const User = require('./models/user');
@@ -33,7 +39,7 @@ app.use(session({
 
 // ----------------------------------------------------------
 // Database setup
-const mongoURI = 'mongodb://ms-user:rkp-BzF-bKC-9rq@ds133041.mlab.com:33041/make-reddit';
+const mongoURI = process.env.DB_PATH;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(mongoURI, { useNewUrlParser: true });
