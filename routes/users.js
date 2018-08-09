@@ -36,9 +36,8 @@ router.get('/new', (req, res) => {
 // Users create
 router.post('/', (req, res) => {
   const user = new User(req.body);
-
   user.save().then((user) => {
-    return res.redirect('/users');
+    return res.redirect('/users/welcome');
   }).catch((err) => {
     console.log(err.message);
   });
@@ -48,5 +47,9 @@ router.post('/', (req, res) => {
   //   return res.redirect('/users');
   // });
 });
+
+router.get('/welcome', (req, res) => {
+  res.render('users/welcome');
+})
 
 module.exports = router;
